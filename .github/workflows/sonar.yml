@@ -16,12 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v1
+      uses: ./  
     - name: run sonarqube
       env:
         GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: sonar-scanner
-           -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
-           -Dsonar.organization=workspace
            -Dsonar.host.url=${{ secrets.SONARQUBE_HOST }}
-           -Dsonar.projectKey=sonar-scanner-action
+           -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}

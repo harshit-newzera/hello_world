@@ -1,18 +1,27 @@
-# This is a basic workflow to help you get started with Actions
+name: sonar
 
-name: sonar using github actions
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on: push
 jobs:
-  sonarQubeTrigger:
-    name: SonarQube Trigger
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@master
-    - name: SonarQube Scan
-      uses: harshit-newzera/my-sonar-action@master
-      with:
-        host: ${{ secrets.SONARQUBE_HOST }}
-        login: ${{ secrets.SONARQUBE_TOKEN }}
+    - uses: actions/checkout@v1
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v1
+    - name: run sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      run: sonar-scanner
+           -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+           -Dsonar.organization=1corp
+           -Dsonar.host.url=${{ secrets.SONARQUBE_HOST }}
+           -Dsonar.projectKey=sonar-scanner-action

@@ -4,7 +4,7 @@ name: sonar using github actions
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on: pull_request
+on: push
 jobs:
   sonarQubeTrigger:
     name: SonarQube Trigger
@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@master
+      uses: harshit-newzera/my-sonar-action@master
       with:
         host: ${{ secrets.SONARQUBE_HOST }}
         login: ${{ secrets.SONARQUBE_TOKEN }}

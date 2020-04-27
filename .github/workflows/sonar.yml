@@ -22,6 +22,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: sonar-scanner
            -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
-           -Dsonar.organization=1corp
+           -Dsonar.organization=workspace
            -Dsonar.host.url=${{ secrets.SONARQUBE_HOST }}
            -Dsonar.projectKey=sonar-scanner-action
